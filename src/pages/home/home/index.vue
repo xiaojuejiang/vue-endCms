@@ -7,7 +7,8 @@
         class="home-slider"
       >
         <el-menu
-          default-active="1-1"
+        default-active="/useList"
+          :router=true
           class="el-menu-vertical-demo"
           @open="handleOpen"
           @close="handleClose"
@@ -25,10 +26,12 @@
               <i class="el-icon-location"></i>
               <span>用户管理</span>
             </template>
-            <el-menu-item index="1-1">
-              <i class="el-icon-menu"></i>用户列表
-            </el-menu-item>
-            <el-menu-item index="1-2"><i class="el-icon-menu"></i>用户列表</el-menu-item>
+            <el-menu-item-group>
+              <el-menu-item index="/useList">
+                <i class="el-icon-menu"></i>用户列表
+              </el-menu-item>
+              <el-menu-item index="1-2"><i class="el-icon-menu"></i>用户列表</el-menu-item>
+            </el-menu-item-group>
           </el-submenu>
           <el-submenu index="2">
             <template slot="title">
@@ -68,7 +71,10 @@
       <el-container>
         <!-- 头部 -->
         <el-header class="home-header">
-          <i class="el-icon-tickets icon" @click="isCollapse=!isCollapse"></i>
+          <i
+            class="el-icon-tickets icon"
+            @click="isCollapse=!isCollapse"
+          ></i>
           <span class="title">电商后台管理系统</span>
           <el-button
             type="text"
@@ -86,31 +92,31 @@
   </div>
 </template>
 <script >
-import {mapState,mapMutations} from "vuex"
+import { mapState, mapMutations } from "vuex";
 export default {
   data() {
     return {
       isCollapse: false
     };
   },
-  created(){
+  created() {
     this.getUsername();
   },
   methods: {
-    ...mapMutations(['getUsername']),
+    ...mapMutations(["getUsername"]),
     handleOpen(key, keyPath) {
       console.log(key, keyPath);
     },
     handleClose(key, keyPath) {
       console.log(key, keyPath);
     },
-    logoutHandle(){
-      localStorage.removeItem('token')
-      this.$router.push({path:'/login'})
+    logoutHandle() {
+      localStorage.removeItem("token");
+      this.$router.push({ path: "/login" });
     }
   },
-  computed:{
-    ...mapState(['username'])
+  computed: {
+    ...mapState(["username"])
   }
 };
 </script>
